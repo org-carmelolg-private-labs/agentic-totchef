@@ -1,0 +1,112 @@
+{
+  "settimane": {
+    "1": {
+      "LUNEDI": {
+        "primo": "Penne al ragù",
+        "secondo": "Omelette al forno",
+        "contorno": "Carote prezzemolate"
+      },
+      "MARTEDI": {
+        "primo": "Minestrina in brodo vegetale",
+        "secondo": "Spezzatino di tacchino in umido",
+        "contorno": "Purea di patate"
+      },
+      "MERCOLEDI": {
+        "primo": "Passato di lenticchie con pasta",
+        "secondo": "Stracchino",
+        "contorno": "Costine all'olio"
+      },
+      "GIOVEDI": {
+        "primo": "Risotto alla parmigiana",
+        "secondo": "Bocconcini di pollo alla pizzaiola",
+        "contorno": "Finocchi lessi"
+      },
+      "VENERDI": {
+        "primo": "Farfalle al pomodoro",
+        "secondo": "Filetto di pesce al limone",
+        "contorno": "Broccoli all'olio"
+      }
+    },
+    "2": {
+      "LUNEDI": {
+        "primo": "Crema di zucca e patate",
+        "secondo": "Tortino di ricotta e spinaci",
+        "contorno": "Finocchi all'olio"
+      },
+      "MARTEDI": {
+        "primo": "Pasta e ceci",
+        "secondo": "Frittata di erbette",
+        "contorno": "Carote prezzemolate"
+      },
+      "MERCOLEDI": {
+        "primo": "Stelline in brodo vegetale",
+        "secondo": "Spezzatino di bovino in umido",
+        "contorno": "Patate al forno"
+      },
+      "GIOVEDI": {
+        "primo": "Fusilli al pomodoro",
+        "secondo": "Mozzarella",
+        "contorno": "Spinaci all'olio e parmigiano"
+      },
+      "VENERDI": {
+        "primo": "Risotto alla parmigiana",
+        "secondo": "Filetto di pesce al sugo",
+        "contorno": "Cavolfiori all'olio"
+      }
+    },
+    "3": {
+      "LUNEDI": {
+        "primo": "Fusilli al ragù",
+        "secondo": "Stracchino/Primo sale",
+        "contorno": "Carote stufate"
+      },
+      "MARTEDI": {
+        "primo": "Pasta burro e salvia",
+        "secondo": "Polpettine di bovino in umido",
+        "contorno": "Patate in insalata"
+      },
+      "MERCOLEDI": {
+        "primo": "Passato di verdura con riso",
+        "secondo": "Prosciutto cotto",
+        "contorno": "Cavolfiori all'olio"
+      },
+      "GIOVEDI": {
+        "primo": "Passato di zucca con orzo",
+        "secondo": "Bocconcini di pollo al sugo",
+        "contorno": "Insalata di patate"
+      },
+      "VENERDI": {
+        "primo": "Risotto allo zafferano",
+        "secondo": "Filetto di pesce al limone",
+        "contorno": "Broccoli all'olio"
+      }
+    },
+    "4": {
+      "LUNEDI": {
+        "primo": "Risotto con la zucca",
+        "secondo": "Robiola",
+        "contorno": "Spinaci all'olio"
+      },
+      "MARTEDI": {
+        "primo": "Minestrina in brodo vegetale",
+        "secondo": "Polpettine di bovino in umido",
+        "contorno": "Costine all'olio"
+      },
+      "MERCOLEDI": {
+        "primo": "Crema di piselli con pasta",
+        "secondo": "Frittata di spinaci/bieta",
+        "contorno": "Finocchi all'olio"
+      },
+      "GIOVEDI": {
+        "primo": "Risotto allo zafferano",
+        "secondo": "Lenticchie in umido",
+        "contorno": "Cavolfiori all'olio"
+      },
+      "VENERDI": {
+        "primo": "Pasta olio e parmigiano",
+        "secondo": "Crocchette di pesce",
+        "contorno": "Carote stufate"
+      }
+    }
+  }
+}

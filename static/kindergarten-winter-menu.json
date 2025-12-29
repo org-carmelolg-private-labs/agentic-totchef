@@ -1,0 +1,112 @@
+{
+  "week": {
+    "1": {
+      "monday": {
+        "carbohydrates": "Penne al ragù",
+        "proteins": "Omelette al forno",
+        "vegetables": "Carote prezzemolate"
+      },
+      "tuesday": {
+        "carbohydrates": "Minestrina in brodo vegetale",
+        "proteins": "Spezzatino di tacchino in umido",
+        "vegetables": "Purea di patate"
+      },
+      "wednesday": {
+        "carbohydrates": "Passato di lenticchie con pasta",
+        "proteins": "Stracchino",
+        "vegetables": "Costine all'olio"
+      },
+      "thursday": {
+        "carbohydrates": "Risotto alla parmigiana",
+        "proteins": "Bocconcini di pollo alla pizzaiola",
+        "vegetables": "Finocchi lessi"
+      },
+      "friday": {
+        "carbohydrates": "Farfalle al pomodoro",
+        "proteins": "Filetto di pesce al limone",
+        "vegetables": "Broccoli all'olio"
+      }
+    },
+    "2": {
+      "monday": {
+        "carbohydrates": "Crema di zucca e patate",
+        "proteins": "Tortino di ricotta e spinaci",
+        "vegetables": "Finocchi all'olio"
+      },
+      "tuesday": {
+        "carbohydrates": "Pasta e ceci",
+        "proteins": "Frittata di erbette",
+        "vegetables": "Carote prezzemolate"
+      },
+      "wednesday": {
+        "carbohydrates": "Stelline in brodo vegetale",
+        "proteins": "Spezzatino di bovino in umido",
+        "vegetables": "Patate al forno"
+      },
+      "thursday": {
+        "carbohydrates": "Fusilli al pomodoro",
+        "proteins": "Mozzarella",
+        "vegetables": "Spinaci all'olio e parmigiano"
+      },
+      "friday": {
+        "carbohydrates": "Risotto alla parmigiana",
+        "proteins": "Filetto di pesce al sugo",
+        "vegetables": "Cavolfiori all'olio"
+      }
+    },
+    "3": {
+      "monday": {
+        "carbohydrates": "Fusilli al ragù",
+        "proteins": "Stracchino/carbohydrates sale",
+        "vegetables": "Carote stufate"
+      },
+      "tuesday": {
+        "carbohydrates": "Pasta burro e salvia",
+        "proteins": "Polpettine di bovino in umido",
+        "vegetables": "Patate in insalata"
+      },
+      "wednesday": {
+        "carbohydrates": "Passato di verdura con riso",
+        "proteins": "Prosciutto cotto",
+        "vegetables": "Cavolfiori all'olio"
+      },
+      "thursday": {
+        "carbohydrates": "Passato di zucca con orzo",
+        "proteins": "Bocconcini di pollo al sugo",
+        "vegetables": "Insalata di patate"
+      },
+      "friday": {
+        "carbohydrates": "Risotto allo zafferano",
+        "proteins": "Filetto di pesce al limone",
+        "vegetables": "Broccoli all'olio"
+      }
+    },
+    "4": {
+      "monday": {
+        "carbohydrates": "Risotto con la zucca",
+        "proteins": "Robiola",
+        "vegetables": "Spinaci all'olio"
+      },
+      "tuesday": {
+        "carbohydrates": "Minestrina in brodo vegetale",
+        "proteins": "Polpettine di bovino in umido",
+        "vegetables": "Costine all'olio"
+      },
+      "wednesday": {
+        "carbohydrates": "Crema di piselli con pasta",
+        "proteins": "Frittata di spinaci/bieta",
+        "vegetables": "Finocchi all'olio"
+      },
+      "thursday": {
+        "carbohydrates": "Risotto allo zafferano",
+        "proteins": "Lenticchie in umido",
+        "vegetables": "Cavolfiori all'olio"
+      },
+      "friday": {
+        "carbohydrates": "Pasta olio e parmigiano",
+        "proteins": "Crocchette di pesce",
+        "vegetables": "Carote stufate"
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "carbohydrates": [
+    "Pasta al pomodoro",
+    "Riso sugo e piselli",
+    "Pasta al cavolo nero",
+    "Pasta al ragù",
+    "Pasta e lenticchie",
+    "Pasta alla zucca",
+    "Pasta al pesto",
+    "Pasta alla crema di ceci",
+    "Pasta alla crema di fagioli",
+    "Pasta alla crema di zucchine",
+    "Pasta e patate"
+  ],
+  "proteins": [
+    "Fettina di carne",
+    "Straccetti di pollo",
+    "Frittata",
+    "Polpette di carne",
+    "Orata in friggitrice ad aria",
+    "Nasello con carote in padella"
+  ],
+  "vegetables": [
+    "Broccoli",
+    "Carote",
+    "Zucchine",
+    "Spinaci",
+    "Piselli",
+    "Fagiolini",
+    "Cavolfiore",
+    "Cavolo nero",
+    "Costine",
+    "Pak Choi",
+    "Verza"
+  ]
+}

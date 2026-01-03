@@ -2,10 +2,22 @@
 Service module to interact with the Kindergarten API.
 """
 from typing import Any
-import requests, json
+import requests, json, os
+from datetime import date
 from lib.utils.EnvironmentVariables import EnvironmentVariables
 
 env = EnvironmentVariables()
+
+def get_current_menu() -> Any | None:
+    """
+    Redirects to the correct menu based on current month:
+    - November (11) to April (4) -> winter menu
+    - May (5) to October (10) -> summer menu
+    """
+    month = date.today().month
+    if month >= 11 or month <= 4:
+        return get_winter_menu()
+    return get_summer_menu()
 
 def get_winter_menu() -> Any | None:
     """
@@ -14,9 +26,10 @@ def get_winter_menu() -> Any | None:
     """
     menu = _get()
     if menu is None:
-        with open('static/kindergarten_winter_menu.json') as json_file:
+        with open('static/kindergarten-winter-menu.json') as json_file:
             return json.load(json_file)
     return None
+
 
 def get_summer_menu() -> Any | None:
     """
@@ -25,7 +38,7 @@ def get_summer_menu() -> Any | None:
     """
     menu = _get()
     if menu is None:
-        with open('static/kindergarten_summer_menu.json') as json_file:
+        with open('static/kindergarten-summer-menu.json') as json_file:
             return json.load(json_file)
     return None
 

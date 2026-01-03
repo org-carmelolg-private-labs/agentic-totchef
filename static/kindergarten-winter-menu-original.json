@@ -35,7 +35,7 @@
       },
       "MARTEDI": {
         "primo": "Pasta e ceci",
-        "secondo": "Frittata di erbette",
+        "secondo": "",
         "contorno": "Carote prezzemolate"
       },
       "MERCOLEDI": {
@@ -62,8 +62,8 @@
       },
       "MARTEDI": {
         "primo": "Pasta burro e salvia",
-        "secondo": "Polpettine di bovino in umido",
-        "contorno": "Patate in insalata"
+        "secondo": "Frittata di erbette",
+        "contorno": "Costine all'olio"
       },
       "MERCOLEDI": {
         "primo": "Passato di verdura con riso",
@@ -90,7 +90,7 @@
       "MARTEDI": {
         "primo": "Minestrina in brodo vegetale",
         "secondo": "Polpettine di bovino in umido",
-        "contorno": "Costine all'olio"
+        "contorno": "Patate in insalata"
       },
       "MERCOLEDI": {
         "primo": "Crema di piselli con pasta",

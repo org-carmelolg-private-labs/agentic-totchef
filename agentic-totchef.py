@@ -1,10 +1,8 @@
-from lib.tool import KindergartenTools, HomeKitchenTools
-from lib.utils import PromptUtils, OllamaUtils
+from lib.core.tools import KindergartenTools, HomeKitchenTools
+from lib.core.providers import OllamaUtils
 
-#user_prompt = "What can I do if I call the spell 'Wingardium Leviosa'?"
-#user_prompt = "What spell would I use to make objects levitate?"
-user_prompt = "Dammi le ricette casalinghe a base di proteine?"
-
+user_prompt = "Dammi le ricette casalinghe a base di verdure?"
+#user_prompt = "Dammi il menu di martedì della seconda settimana del nido"
 # get available functions
 _functions = {}
 _functions.update(KindergartenTools.available_functions())

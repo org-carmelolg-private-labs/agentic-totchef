@@ -2,9 +2,9 @@
 Service module to interact with the Kindergarten API.
 """
 from typing import Any
-import requests, json, os
+import requests, json
 from datetime import date
-from lib.utils.EnvironmentVariables import EnvironmentVariables
+from lib.commons.EnvironmentVariables import EnvironmentVariables
 
 env = EnvironmentVariables()
 

@@ -3,7 +3,8 @@ Knowledge Service Module
 Provides functions to build a knowledge graph from a dataset and retrieve relevant chunks based on a query.
 """
 
-from lib.utils import OllamaUtils as OllamaUtils, MathUtils as MathUtils
+from lib.core.providers import OllamaUtils as OllamaUtils
+from lib.commons import MathUtils as MathUtils
 
 
 def build_knowledge(dataset):
@@ -41,3 +42,29 @@ def get_most_relevant_chunks(query, knowledge, top_n=3):
 
         # Finally, return the top N most relevant chunks
         return similarities[:top_n]
+
+def get_best_matching_chunk(query, chunks):
+    """Finds the best matching chunk from a list of chunks based on a query.
+
+    Args:
+        query (str): The input query string to find the best matching chunk for.
+        chunks (list): A list of chunk strings.
+    Returns:
+        dict: A dictionary containing the best matching chunk and its similarity score.
+    """
+    query_embedding = OllamaUtils.embed_text(text=query)
+    best_match = None
+    highest_similarity = -1  # Initialize with a very low value
+
+    for chunk in chunks:
+        chunk_embedding = OllamaUtils.embed_text(text=chunk)
+        similarity = MathUtils.cosine_similarity(query_embedding, chunk_embedding)
+
+        if similarity > highest_similarity:
+            highest_similarity = similarity
+            best_match = chunk
+
+    if best_match is not None:
+        return {"match": best_match, "similarity": highest_similarity}
+    else:
+        return None

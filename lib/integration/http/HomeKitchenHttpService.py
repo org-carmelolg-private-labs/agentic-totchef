@@ -3,7 +3,7 @@ Service module for interacting with the Home Kitchen API.
 """
 from typing import Any
 import requests, json
-from lib.utils.EnvironmentVariables import EnvironmentVariables
+from lib.commons.EnvironmentVariables import EnvironmentVariables
 
 env = EnvironmentVariables()
 

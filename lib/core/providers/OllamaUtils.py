@@ -3,7 +3,7 @@ Utility functions for interacting with Ollama models for embedding and chat func
 """
 from typing import List
 import ollama as _ollama_client
-from lib.utils.EnvironmentVariables import EnvironmentVariables
+from lib.commons.EnvironmentVariables import EnvironmentVariables
 
 env = EnvironmentVariables()
 

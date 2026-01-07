@@ -8,7 +8,7 @@ from lib.commons.EnvironmentVariables import EnvironmentVariables
 env = EnvironmentVariables()
 
 EMBEDDING_MODEL = env.get_embedding_model('nomic-embed-text:latest')
-LANGUAGE_MODEL = env.get_language_model('qwen3:lates')
+LANGUAGE_MODEL = env.get_language_model('qwen3:latest')
 THINKING_MODE= env.get_thinking_mode('True')
 
 def embed_text(text: str) -> List[float]:

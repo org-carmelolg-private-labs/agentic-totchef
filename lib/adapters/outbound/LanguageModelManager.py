@@ -8,7 +8,7 @@ LLM_PROVIDER = env.get_llm_provider('ollama')
 
 const = Constants.get_instance()
 
-def chat(prompt: str):
+def chat(prompt: str, system_prompt: str = None):
     """
     Facilitates a chat interaction with the specified language model, incorporating tool calls.
     :param prompt:
@@ -21,6 +21,6 @@ def chat(prompt: str):
     functions = _functions
 
     if LLM_PROVIDER == const.llm_provider_ollama:
-        return OllamaProvider.chat(user_prompt=prompt, tools=functions)
+        return OllamaProvider.chat(prompt=prompt, tools=functions)
 
     return None

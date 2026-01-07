@@ -20,20 +20,26 @@ def embed_text(text: str) -> List[float]:
     return _ollama_client.embed(model=EMBEDDING_MODEL, input=text)['embeddings'][0]
 
 def chat(
-        user_prompt: str,
+        prompt: str,
         tools: dict,
         system_prompt: str = None,
         assistant_prompt: str = None
 ):
     """
     Facilitates a chat interaction with the specified language model, incorporating tool calls.
-    :param user_prompt:
+    :param prompt:
     :param tools:
     :param system_prompt:
     :param assistant_prompt:
     :return:
     """
-    _messages = [{"role": "user", "content": user_prompt}]
+    _messages = []
+
+    if system_prompt is not None:
+        _messages.append({'role': 'system', 'content': system_prompt})
+
+    _messages = [{"role": "user", "content": prompt}]
+
     response = _ollama_client.chat(model=LANGUAGE_MODEL, messages=_messages, tools=tools.values(), think=THINKING_MODE)
     _messages.append(response.message)
 
@@ -46,8 +52,6 @@ def chat(
             else:
                 print(f"No tool available for {tc.function.name}")
 
-    if system_prompt is not None:
-        _messages.append({'role': 'system', 'content': system_prompt})
     if assistant_prompt is not None:
         _messages.append({'role': 'assistant', 'content': assistant_prompt})
 

@@ -3,7 +3,7 @@ Knowledge Service Module
 Provides functions to build a knowledge graph from a dataset and retrieve relevant chunks based on a query.
 """
 
-from lib.core.providers import OllamaUtils as OllamaUtils
+from lib.core.providers import OllamaProvider as OllamaProvider
 from lib.commons import MathUtils as MathUtils
 
 
@@ -13,7 +13,7 @@ def build_knowledge(dataset):
     """
     knowledge = []
     for i, chunk in enumerate(dataset):
-        embedding = OllamaUtils.embed_text(text=chunk)
+        embedding = OllamaProvider.embed_text(text=chunk)
         knowledge.append((chunk, embedding))
     return knowledge
 
@@ -30,7 +30,7 @@ def get_most_relevant_chunks(query, knowledge, top_n=3):
             list: A list of the top N most relevant chunks, each represented as a tuple
                 containing the chunk (str) and its similarity score (float).
         """
-        query_embedding = OllamaUtils.embed_text(text=query)
+        query_embedding = OllamaProvider.embed_text(text=query)
         # Temporary list to store (chunk, similarity) pairs
         similarities = []
         for chunk, embedding in knowledge:
@@ -52,12 +52,12 @@ def get_best_matching_chunk(query, chunks):
     Returns:
         dict: A dictionary containing the best matching chunk and its similarity score.
     """
-    query_embedding = OllamaUtils.embed_text(text=query)
+    query_embedding = OllamaProvider.embed_text(text=query)
     best_match = None
     highest_similarity = -1  # Initialize with a very low value
 
     for chunk in chunks:
-        chunk_embedding = OllamaUtils.embed_text(text=chunk)
+        chunk_embedding = OllamaProvider.embed_text(text=chunk)
         similarity = MathUtils.cosine_similarity(query_embedding, chunk_embedding)
 
         if similarity > highest_similarity:

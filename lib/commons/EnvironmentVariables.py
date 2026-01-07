@@ -40,3 +40,7 @@ class EnvironmentVariables:
     @staticmethod
     def get_home_kitchen_api_path(default: str = None) -> str:
         return os.getenv("HOME_KITCHEN_API_PATH", default)
+
+    @staticmethod
+    def get_llm_provider(default: str = None) -> str:
+        return os.getenv("LLM_PROVIDER", default)

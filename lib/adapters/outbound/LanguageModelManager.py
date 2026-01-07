@@ -9,6 +9,11 @@ LLM_PROVIDER = env.get_llm_provider('ollama')
 const = Constants.get_instance()
 
 def chat(prompt: str):
+    """
+    Facilitates a chat interaction with the specified language model, incorporating tool calls.
+    :param prompt:
+    :return: 
+    """
 
     _functions = {}
     _functions.update(KindergartenTools.available_functions())

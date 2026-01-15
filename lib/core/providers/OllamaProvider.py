@@ -1,59 +1,69 @@
-"""
-Utility functions for interacting with Ollama models for embedding and chat functionalities.
-"""
-from typing import List
-import ollama as _ollama_client
+from typing import Iterator, Union, List
+
+import ollama as OllamaClient
+
 from lib.commons.EnvironmentVariables import EnvironmentVariables
+from lib.core.providers.LLMProvider import Provider
+from lib.core.providers.model.LLMProviderConfiguration import ProviderConfiguration
 
 env = EnvironmentVariables()
 
-EMBEDDING_MODEL = env.get_embedding_model('nomic-embed-text:latest')
-LANGUAGE_MODEL = env.get_language_model('qwen3:latest')
-THINKING_MODE= env.get_thinking_mode('True')
+class OllamaProvider(Provider):
+    __instance = None
 
-def embed_text(text: str) -> List[float]:
-    """
-    Generates an embedding for the given text using the specified embedding model.
-    :param text:
-    :return:
-    """
-    return _ollama_client.embed(model=EMBEDDING_MODEL, input=text)['embeddings'][0]
+    @staticmethod
+    def get_instance():
+        if OllamaProvider.__instance is None:
+            OllamaProvider()
+        return OllamaProvider.__instance
 
-def chat(
-        prompt: str,
-        tools: dict,
-        system_prompt: str = None,
-        assistant_prompt: str = None
-):
-    """
-    Facilitates a chat interaction with the specified language model, incorporating tool calls.
-    :param prompt:
-    :param tools:
-    :param system_prompt:
-    :param assistant_prompt:
-    :return:
-    """
-    _messages = []
+    def __init__(self):
+        if OllamaProvider.__instance is not None:
+            raise Exception("This class is a singleton!")
+        else:
+            OllamaProvider.__instance = self
 
-    if system_prompt is not None:
-        _messages.append({'role': 'system', 'content': system_prompt})
+    def agentic_chat(self, prompt: str, model: str, system_prompt: str, assistant_prompt: str, tools: dict,
+                     config: ProviderConfiguration = None) -> Union[
+        OllamaClient.ChatResponse, Iterator[OllamaClient.ChatResponse]]:
 
-    _messages = [{"role": "user", "content": prompt}]
+        think = True if config is not None and config.get_think() is not None and config.get_think() else False
 
-    response = _ollama_client.chat(model=LANGUAGE_MODEL, messages=_messages, tools=tools.values(), think=THINKING_MODE)
-    _messages.append(response.message)
+        _messages = []
 
-    if response.message.tool_calls:
-        for tc in response.message.tool_calls:
-            if tc.function.name in tools:
-                result = tools[tc.function.name](**tc.function.arguments)
-                # add the tool result to the messages
-                _messages.append({'role': 'tool', 'tool_name': tc.function.name, 'content': str(result)})
-            else:
-                print(f"No tool available for {tc.function.name}")
+        if system_prompt is not None:
+            _messages.append({'role': 'system', 'content': system_prompt})
 
-    if assistant_prompt is not None:
-        _messages.append({'role': 'assistant', 'content': assistant_prompt})
+        _messages = [{"role": "user", "content": prompt}]
 
-    # generate the final response
-    return _ollama_client.chat(model=LANGUAGE_MODEL, messages=_messages, tools=tools.values(), stream=True, think=False)
+        response = OllamaClient.chat(model=model, messages=_messages, tools=tools.values(),
+                                     think=think)
+        _messages.append(response.message)
+
+        if response.message.tool_calls:
+            for tc in response.message.tool_calls:
+                if tc.function.name in tools:
+                    result = tools[tc.function.name](**tc.function.arguments)
+                    # add the tool result to the messages
+                    _messages.append({'role': 'tool', 'tool_name': tc.function.name, 'content': str(result)})
+                else:
+                    print(f"No tool available for {tc.function.name}")
+
+        if assistant_prompt is not None:
+            _messages.append({'role': 'assistant', 'content': assistant_prompt})
+
+        # generate the final response
+        return OllamaClient.chat(model=model, messages=_messages, tools=tools.values(), stream=True,
+                                 think=False)
+
+    def simple_chat(self, prompt: str, model: str, config: ProviderConfiguration = None) -> Union[
+        OllamaClient.ChatResponse, Iterator[OllamaClient.ChatResponse]]:
+        return OllamaClient.chat(
+            model=model,
+            messages=[{'role': 'user', 'content': prompt}],
+            stream=config.get_stream(),
+            think=config.get_think()
+        )
+
+    def embed(self, text: str, embedding_model: str = env.get_embedding_model()) -> List[float]:
+        return OllamaClient.embed(model=embedding_model, input=text)['embeddings'][0]

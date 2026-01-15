@@ -1,4 +1,4 @@
-from lib.adapters.outbound import LanguageModelManager
+from lib.adapters.outbound import LLMExecutor
 
 user_prompt = "Dammi le ricette casalinghe a base di verdure?"
 #user_prompt = "Dammi il menu di martedì della seconda settimana del nido"

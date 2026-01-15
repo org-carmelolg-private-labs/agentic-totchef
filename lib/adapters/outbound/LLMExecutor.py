@@ -1,12 +1,16 @@
 from lib.commons.Constants import Constants
 from lib.commons.EnvironmentVariables import EnvironmentVariables
-from lib.core.providers import OllamaProvider
+from lib.core.providers.LLMProviderFactory import LLMProviderFactory
+from lib.core.providers.model.LLMProviderConfiguration import ProviderConfiguration
 from lib.core.tools import KindergartenTools, HomeKitchenTools
 
 env = EnvironmentVariables()
-LLM_PROVIDER = env.get_llm_provider('ollama')
 
 const = Constants.get_instance()
+current_provider = LLMProviderFactory.get_instance()
+think = env.get_provider_think_mode()
+llm = env.get_language_model()
+embedding_llm = env.get_embedding_model()
 
 def chat(prompt: str, system_prompt: str = None):
     """
@@ -20,7 +24,5 @@ def chat(prompt: str, system_prompt: str = None):
     _functions.update(HomeKitchenTools.available_functions())
     functions = _functions
 
-    if LLM_PROVIDER == const.llm_provider_ollama:
-        return OllamaProvider.chat(prompt=prompt, tools=functions)
-
-    return None
+    config: ProviderConfiguration = ProviderConfiguration(think=think, stream=False)
+    return current_provider.chat(prompt=prompt, model=llm, tools=functions, config=config)

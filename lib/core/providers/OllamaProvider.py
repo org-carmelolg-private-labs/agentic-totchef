@@ -1,12 +1,14 @@
 from typing import Iterator, Union, List
 
 import ollama as OllamaClient
+from docutils.nodes import system_message
 
 from lib.commons.EnvironmentVariables import EnvironmentVariables
 from lib.core.providers.LLMProvider import Provider
 from lib.core.providers.model.LLMProviderConfiguration import ProviderConfiguration
 
 env = EnvironmentVariables()
+
 
 class OllamaProvider(Provider):
     __instance = None
@@ -28,6 +30,7 @@ class OllamaProvider(Provider):
         OllamaClient.ChatResponse, Iterator[OllamaClient.ChatResponse]]:
 
         think = True if config is not None and config.get_think() is not None and config.get_think() else False
+        stream = True if config is not None and config.get_stream() is not None and config.get_stream() else False
 
         _messages = []
 
@@ -53,14 +56,20 @@ class OllamaProvider(Provider):
             _messages.append({'role': 'assistant', 'content': assistant_prompt})
 
         # generate the final response
-        return OllamaClient.chat(model=model, messages=_messages, tools=tools.values(), stream=True,
+        return OllamaClient.chat(model=model, messages=_messages, tools=tools.values(), stream=stream,
                                  think=False)
 
-    def simple_chat(self, prompt: str, model: str, config: ProviderConfiguration = None) -> Union[
+    def simple_chat(self, prompt: str, model: str, system_prompt: str = None, config: ProviderConfiguration = None) -> \
+    Union[
         OllamaClient.ChatResponse, Iterator[OllamaClient.ChatResponse]]:
+
+        _messages = [{'role': 'user', 'content': prompt}]
+        if system_prompt is not None:
+            _messages.append({'role': 'system', 'content': system_prompt})
+
         return OllamaClient.chat(
             model=model,
-            messages=[{'role': 'user', 'content': prompt}],
+            messages=_messages,
             stream=config.get_stream(),
             think=config.get_think()
         )

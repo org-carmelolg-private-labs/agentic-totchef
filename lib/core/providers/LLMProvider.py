@@ -18,7 +18,7 @@ class Provider(ABC):
     ) -> any:
         """
         Chat with a given prompt using the specified model.
-        If tools are provided, use agentic_chat; otherwise, use simple_chat.
+        If tools are provided, use agentic_chat; otherwise, use runner.
 
         :param prompt: The input prompt string to generate a response for.
         :param model: The model identifier to use for generating responses.

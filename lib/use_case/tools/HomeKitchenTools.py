@@ -1,8 +1,8 @@
 """
 Home Kitchen Tools Module for retrieving home kitchen recipes.
 """
-from lib.core.service import KnowledgeService
-from lib.integration.http import HomeKitchenHttpService
+from lib.core.service.KnowledgeService import KnowledgeService
+from lib.use_case.integration.http import HomeKitchenHttpService
 
 
 def available_functions() -> dict:

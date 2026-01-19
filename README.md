@@ -127,13 +127,17 @@ Output:
 │   │   │   └── model/                  # LLM provider configuration models
 │   │   ├── service/
 │   │   │   └── KnowledgeService.py     # Orchestrates knowledge retrieval and tool execution
-│   │   └── tools/
-│   │       ├── HomeKitchenTools.py     # Tools for home kitchen domain
-│   │       └── KindergartenTools.py    # Tools for kindergarten domain
 │   └── integration/
 │       └── http/
 │           ├── HomeKitchenHttpService.py   # HTTP client for home kitchen APIs
 │           └── KindergartenHttpService.py  # HTTP client for kindergarten APIs
+│   middleware/
+│   │   ├── runner/
+│   │   │   ├── TotChef.py              # Simple chat runner for the Totchef agent
+│   │   │   └── TotChefChatbot.py       # Chatbot loop also with interface for Totchef agent 
+│   │   └── tools/
+│   │       ├── HomeKitchenTools.py     # Tools for home kitchen domain
+│   │       └── KindergartenTools.py    # Tools for kindergarten domain
 ├── agentic-totchef-chat.py             # Command-line interface for the agent
 ├── agentic-totchef-gui-chat.py         # GUI interface for the agent
 ├── Dockerfile                          # Dockerization setup

@@ -1,7 +1,6 @@
 from typing import Iterator, Union, List
 
 import ollama as OllamaClient
-from docutils.nodes import system_message
 
 from lib.commons.EnvironmentVariables import EnvironmentVariables
 from lib.core.providers.LLMProvider import Provider
@@ -34,9 +33,6 @@ class OllamaProvider(Provider):
 
         _messages = []
 
-        if system_prompt is not None:
-            _messages.append({'role': 'system', 'content': system_prompt})
-
         _messages = [{"role": "user", "content": prompt}]
 
         response = OllamaClient.chat(model=model, messages=_messages, tools=tools.values(),
@@ -51,6 +47,9 @@ class OllamaProvider(Provider):
                     _messages.append({'role': 'tool', 'tool_name': tc.function.name, 'content': str(result)})
                 else:
                     print(f"No tool available for {tc.function.name}")
+
+        if system_prompt is not None:
+            _messages.append({'role': 'system', 'content': system_prompt})
 
         if assistant_prompt is not None:
             _messages.append({'role': 'assistant', 'content': assistant_prompt})

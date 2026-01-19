@@ -1,8 +1,7 @@
 """
 Kindergarten Tools module for retrieving kindergarten menu information.
 """
-from lib.integration.http import KindergartenHttpService
-
+from lib.use_case.integration.http import KindergartenHttpService
 
 def available_functions() -> dict:
     """

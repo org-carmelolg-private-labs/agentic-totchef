@@ -25,7 +25,7 @@ A minimal **AI Agent** example for managing recipes and kindergarten activities 
 ## Installation
 
 ```bash
-git clone https://github.com/org-carmelolg-private-labs/agentic-totchef.git # Update with actual repo if different
+git clone https://github.com/org-carmelolg-private-labs/agentic-totchef.git
 cd agentic-totchef
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate

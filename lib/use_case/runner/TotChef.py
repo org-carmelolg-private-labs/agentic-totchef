@@ -21,14 +21,15 @@ class TotChef:
 
     @staticmethod
     def run():
-        # print("Generating Kindergarten Menu for Week 1 Morning...")
-        first_workweek_menu_morning = llm_executor.chat(prompt=kindergarten_menu_prompt.get_user_prompt(1),
-                                                        system_prompt=kindergarten_menu_prompt.get_system_prompt(),
-                                                        chatbot_mode=False,
-                                                        tools=KindergartenTools.available_functions()).message.content
+        print("Generating Kindergarten Menu for Week 1 Morning...")
+        first_workweek_menu_morning = llm_executor.chat(
+            prompt=kindergarten_menu_prompt.get_user_prompt(1),
+            system_prompt=kindergarten_menu_prompt.get_system_prompt(),
+            chatbot_mode=False,
+            tools=KindergartenTools.available_functions()).message.content
         # TotChef.log_element(first_workweek_menu_morning)
 
-        # print("Generating Home Menu for Week 1 Evening...")
+        print("Generating Home Menu for Week 1 Evening...")
         first_workweek_menu_evening = llm_executor.chat(
             prompt=home_menu_prompt.get_user_prompt(first_workweek_menu_morning),
             system_prompt=home_menu_prompt.get_system_prompt(),
@@ -37,25 +38,27 @@ class TotChef:
 
         # TotChef.log_element(first_workweek_menu_evening)
 
-        # print("Union of Morning and Evening Menus for Week 1...")
+        print("Union of Morning and Evening Menus for Week 1...")
         workday_full_menu = llm_executor.ask(
             prompt=merge_menu_prompt.get_user_prompt(first_workweek_menu_morning, first_workweek_menu_evening),
             chatbot_mode=False).message.content
 
         # TotChef.log_element(workday_full_menu)
 
-        full_week_menu = llm_executor.chat(prompt=weekend_menu_prompt.get_user_prompt(workday_full_menu),
-                                           system_prompt=weekend_menu_prompt.get_system_prompt(),
-                                           chatbot_mode=False,
-                                           tools=HomeKitchenTools.available_functions()).message.content
+        print("Generating Full Week Menu...")
+        full_week_menu = llm_executor.chat(
+            prompt=weekend_menu_prompt.get_user_prompt(workday_full_menu),
+            system_prompt=weekend_menu_prompt.get_system_prompt(),
+            chatbot_mode=False,
+            tools=HomeKitchenTools.available_functions()).message.content
 
         TotChef.log_element(full_week_menu)
 
         # TODO generate an adeguate prompt for shopping list. This is for testing purpose only
-        shopping_list = llm_executor.ask(
-            prompt=f"Generami una lista della spesa divisa per categoria di prodotto in base al menu in input: {full_week_menu}",
-            chatbot_mode=False).message.content
-        TotChef.log_element(shopping_list)
+        # shopping_list = llm_executor.ask(
+        #     prompt=f"Generami una lista della spesa divisa per categoria di prodotto in base al menu in input: {full_week_menu}",
+        #     chatbot_mode=False).message.content
+        # TotChef.log_element(shopping_list)
 
     @staticmethod
     def log_element(string: str):
@@ -63,29 +66,3 @@ class TotChef:
         print()
         print('-----------------------------------')
         print()
-
-    @staticmethod
-    def example():
-        """
-        Run a TotChef session that utilizes functions from
-        KindergartenTools and HomeKitchenTools to assist users
-        with culinary and nutritional queries.
-        :return:
-        """
-        user_prompt = "Dammi le ricette casalinghe a base di verdure?"
-        # user_prompt = "Dammi il menu di martedì della seconda settimana del nido"
-
-        _functions = {}
-        _functions.update(KindergartenTools.available_functions())
-        _functions.update(HomeKitchenTools.available_functions())
-
-        first_response = llm_executor.chat(prompt=user_prompt, chatbot_mode=False, tools=_functions).message.content
-
-        print(first_response)
-        print('************************')
-
-        second_response = llm_executor.ask(prompt=first_response,
-                                           system_prompt="Ti è stato consegnata una lista di verdure. Restituisci solo quelle con il nome che inizia per C",
-                                           chatbot_mode=False).message.content
-
-        print(second_response)

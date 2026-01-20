@@ -77,6 +77,28 @@ chmod +x run-docker.sh
 
 ## Usage Examples
 
+**Automated Menu Generation**:
+
+Running `agentic-totchef.py` will automatically generate a full week menu based on the kindergarten and home kitchen menus.
+
+```bash
+python agentic-totchef.py
+```
+
+Expected output:
+
+```
+Generating Kindergarten Menu for Week 1 Morning...
+Generating Home Menu for Week 1 Evening...
+Union of Morning and Evening Menus for Week 1...
+Generating Full Week Menu...
+<A full week menu will be printed here>
+```
+
+**Interactive Chat**:
+
+You can also interact with the agent using a chat interface.
+
 **Home Kitchen Query**:
 
 ```

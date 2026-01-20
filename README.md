@@ -111,33 +111,36 @@ Output:
 ├── lib/
 │   ├── adapters/
 │   │   └── outbound/
-│   │       ├── LLMExecutor.py          # Executes LLM interactions and tool calls
-│   │       └── ...
+│   │       └── LLMExecutor.py          # Executes LLM interactions and tool calls
 │   ├── commons/
 │   │   ├── Constants.py                # Project-wide constants
 │   │   ├── EnvironmentVariables.py     # Manages environment variables
 │   │   └── MathUtils.py                # Utility functions
 │   ├── core/
-│   │   ├── prompts/
-│   │   │   └── PromptManager.py        # Manages system prompts
 │   │   ├── providers/
 │   │   │   ├── LLMProvider.py          # Interface for LLM providers
 │   │   │   ├── LLMProviderFactory.py   # Factory for creating LLM providers
 │   │   │   ├── OllamaProvider.py       # Ollama specific LLM provider
 │   │   │   └── model/                  # LLM provider configuration models
-│   │   ├── service/
-│   │   │   └── KnowledgeService.py     # Orchestrates knowledge retrieval and tool execution
-│   └── integration/
-│       └── http/
-│           ├── HomeKitchenHttpService.py   # HTTP client for home kitchen APIs
-│           └── KindergartenHttpService.py  # HTTP client for kindergarten APIs
-│   middleware/
-│   │   ├── runner/
-│   │   │   ├── TotChef.py              # Simple chat runner for the Totchef agent
-│   │   │   └── TotChefChatbot.py       # Chatbot loop also with interface for Totchef agent 
-│   │   └── tools/
-│   │       ├── HomeKitchenTools.py     # Tools for home kitchen domain
-│   │       └── KindergartenTools.py    # Tools for kindergarten domain
+│   │   └── service/
+│   │       └── KnowledgeService.py     # Orchestrates knowledge retrieval and tool execution
+│   └── use_case/
+│       ├── integration/
+│       │   └── http/
+│       │       ├── HomeKitchenHttpService.py   # HTTP client for home kitchen APIs
+│       │       └── KindergartenHttpService.py  # HTTP client for kindergarten APIs
+│       ├── prompts/
+│       │   ├── HomeMenuPrompt.py
+│       │   ├── KindergartenMenuPrompt.py
+│       │   ├── MergeMenuPrompt.py
+│       │   ├── PromptManager.py        # Manages system prompts
+│       │   └── WeekendMenuPrompt.py
+│       ├── runner/
+│       │   ├── TotChef.py              # Simple chat runner for the Totchef agent
+│       │   └── TotChefChatbot.py       # Chatbot loop also with interface for Totchef agent
+│       └── tools/
+│           ├── HomeKitchenTools.py     # Tools for home kitchen domain
+│           └── KindergartenTools.py    # Tools for kindergarten domain
 ├── agentic-totchef-chat.py             # Command-line interface for the agent
 ├── agentic-totchef-gui-chat.py         # GUI interface for the agent
 ├── Dockerfile                          # Dockerization setup

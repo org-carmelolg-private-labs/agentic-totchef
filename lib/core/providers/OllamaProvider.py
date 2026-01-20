@@ -35,6 +35,9 @@ class OllamaProvider(Provider):
 
         _messages = [{"role": "user", "content": prompt}]
 
+        if assistant_prompt is not None:
+            _messages.append({'role': 'assistant', 'content': assistant_prompt})
+
         response = OllamaClient.chat(model=model, messages=_messages, tools=tools.values(),
                                      think=think)
         _messages.append(response.message)
@@ -51,16 +54,13 @@ class OllamaProvider(Provider):
         if system_prompt is not None:
             _messages.append({'role': 'system', 'content': system_prompt})
 
-        if assistant_prompt is not None:
-            _messages.append({'role': 'assistant', 'content': assistant_prompt})
-
         # generate the final response
-        return OllamaClient.chat(model=model, messages=_messages, tools=tools.values(), stream=stream,
+        return OllamaClient.chat(model=model, messages=_messages, stream=stream,
                                  think=False)
 
     def simple_chat(self, prompt: str, model: str, system_prompt: str = None, config: ProviderConfiguration = None) -> \
-    Union[
-        OllamaClient.ChatResponse, Iterator[OllamaClient.ChatResponse]]:
+            Union[
+                OllamaClient.ChatResponse, Iterator[OllamaClient.ChatResponse]]:
 
         _messages = [{'role': 'user', 'content': prompt}]
         if system_prompt is not None:

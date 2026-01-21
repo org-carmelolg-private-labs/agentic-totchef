@@ -17,7 +17,7 @@ def get(api_host: str, api_path: str, fallback_path: str) -> Any | None:
     Returns:
         dict: The JSON response from the API or the content of the fallback file.
     """
-s    if api_host and api_path:
+    if api_host and api_path:
         try:
             response = requests.get(f"{api_host}/{api_path}")
             response.raise_for_status()

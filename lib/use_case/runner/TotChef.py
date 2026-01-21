@@ -7,10 +7,10 @@ from lib.use_case.tools import KindergartenTools, HomeKitchenTools
 
 llm_executor = LLMExecutor.get_instance()
 
-kindergarten_menu_prompt = GetKindergartenMenuPrompt.get_instance()
-home_menu_prompt = GenerateHomeMenuPrompt.get_instance()
-merge_menu_prompt = MergeMenuPrompt.get_instance()
-weekend_menu_prompt = WeekendMenuPrompt.get_instance()
+kindergarten_menu_prompt = GetKindergartenMenuPrompt()
+home_menu_prompt = GenerateHomeMenuPrompt()
+merge_menu_prompt = MergeMenuPrompt()
+weekend_menu_prompt = WeekendMenuPrompt()
 
 
 class TotChef:

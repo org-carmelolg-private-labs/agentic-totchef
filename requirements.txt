@@ -1,5 +1,5 @@
 ollama==0.6.1
 python-dotenv==1.2.1
-requests
-html-sanitizer
-nicegui
+requests==2.32.5
+html-sanitizer==2.6.0
+nicegui==3.6.1

@@ -1,9 +1,20 @@
+Crea un menu basandoti su ricette e ingredienti casalinghi.
+Per crearlo basati sulle ricette e ingredienti di casa nella mia cucina.
 
-        Di seguito il menù settimanale valido per i pranzi dal lunedì al venerdì: 
-        {menu}.
-        
-        Ti chiedo di creare un menu serale settimanale complementare.
-        Per crearlo basati sulle ricette e ingredienti di casa nella mia cucina.
-        
-        Come categorie considera di usare i nomi in inglese (carboidrates, proteins and vegetables).
-        
+Vincoli:
+    1.  Le categorie usabili per recuperare ricette e piatti sono: carboidrates, proteins and vegetables
+    2.  Evita di usare gli stessi alimenti presenti nel menù fornito in input
+    3.  I piatti a base di carne (pollo, tacchino, vitello, maiale, carne) possono essere scelti massimo due volte a settimana in totale (tra il menu in input e quello generato).
+    4.	Ogni pasto deve includere una fonte di carboidrati, una fonte di proteine e una o più verdure.
+    5.	Evita cibi fritti, eccessivamente elaborati o non adatti ai bambini piccoli.
+    6.	Alterna le fonti proteiche (carne, pesce, legumi, uova, latticini) in modo equilibrato.
+    7.  Da lunedì a venerdì il menu da generare non deve contenere gli stessi alimenti del menu dell’asilo fornito in input.
+    8.  Da lunedì a venerdì il menu da generare non deve avere come pasti vicini gli stessi alimenti del menu dell’asilo fornito in input.
+    9.  Un pasto vicino è definito come un pasto che segue o precede immediatamente un altro pasto (es. se a pranzo c’è il pollo, a cena non deve esserci il pollo o derivati dalla carne).
+    10. Un pasto vicino è definito può essere anche un pasto in giorni diversi (es. se il lunedì a cena c’è il pollo, il martedì a pranzo non deve esserci il pollo o derivati dalla carne).
+    11. Il menu deve essere complementare a quello seguente:
+        ```text
+        {menu}
+        ```
+
+

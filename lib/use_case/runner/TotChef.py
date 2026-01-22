@@ -27,7 +27,7 @@ class TotChef:
             system_prompt=kindergarten_menu_prompt.get_system_prompt(),
             chatbot_mode=False,
             tools=KindergartenTools.available_functions()).message.content
-        # TotChef.log_element(first_workweek_menu_morning)
+        TotChef.log_element(first_workweek_menu_morning)
 
         print("Generating Home Menu for Week 1 Evening...")
         first_workweek_menu_evening = llm_executor.chat(
@@ -36,14 +36,14 @@ class TotChef:
             chatbot_mode=False,
             tools=HomeKitchenTools.available_functions()).message.content
 
-        # TotChef.log_element(first_workweek_menu_evening)
+        TotChef.log_element(first_workweek_menu_evening)
 
         print("Union of Morning and Evening Menus for Week 1...")
         workday_full_menu = llm_executor.ask(
             prompt=merge_menu_prompt.get_user_prompt(first_workweek_menu_morning, first_workweek_menu_evening),
             chatbot_mode=False).message.content
 
-        # TotChef.log_element(workday_full_menu)
+        TotChef.log_element(workday_full_menu)
 
         print("Generating Full Week Menu...")
         full_week_menu = llm_executor.chat(

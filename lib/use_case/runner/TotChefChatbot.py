@@ -3,26 +3,25 @@ from lib.use_case.tools import KindergartenTools, HomeKitchenTools
 from html_sanitizer import Sanitizer
 from nicegui import ui
 
-llm_executor = LLMExecutor.get_instance()
-
 class TotChefChatbot:
     """
     TotChef Chatbot class that provides an interactive chat interface
     for culinary and nutritional assistance using functions from
     KindergartenTools and HomeKitchenTools.
     """
-    @staticmethod
-    def run():
+    def __init__(self):
+        self.llm_executor = LLMExecutor.get_instance()
+        self.tools = {}
+        self.tools.update(KindergartenTools.available_functions())
+        self.tools.update(HomeKitchenTools.available_functions())
+
+    def run(self):
         """
         Run an interactive chatbot session for TotChef.
         The chatbot utilizes functions from KindergartenTools and HomeKitchenTools
         to assist users with culinary and nutritional queries.
         :return:
         """
-        _functions = {}
-        _functions.update(KindergartenTools.available_functions())
-        _functions.update(HomeKitchenTools.available_functions())
-
         print("Welcome to TotChef Chat! Type 'exit' or 'quit' to end the chat.")
 
         # Start chat
@@ -32,7 +31,7 @@ class TotChefChatbot:
                 break
             else:
                 print('Assistant >', end=' ')
-                stream = llm_executor.chat(prompt=user_prompt, tools=_functions)
+                stream = self._chat(user_prompt)
                 # print the response from the chatbot in real-time
                 for chunk in stream:
                     print(chunk['message']['content'], end='', flush=True)
@@ -45,11 +44,8 @@ class TotChefChatbot:
         :param user_prompt: The prompt or question from the user.
         :return: A stream of responses from the chatbot.
         """
-        _functions = {}
-        _functions.update(KindergartenTools.available_functions())
-        _functions.update(HomeKitchenTools.available_functions())
+        return self.llm_executor.chat(prompt=user_prompt, tools=self.tools)
 
-        return llm_executor.chat(prompt=user_prompt, tools=_functions)
     def _root(self):
         """
         Define the GUI layout and behavior for the TotChef chatbot.

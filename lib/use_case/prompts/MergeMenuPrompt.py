@@ -6,7 +6,7 @@ class MergeMenuPrompt(FilePromptManager):
     """
     def __init__(self):
         super().__init__(
-            system_prompt_path=None,
+            system_prompt_path='',
             user_prompt_path='lib/use_case/prompts/templates/merge_menu_user.prompt'
         )
 

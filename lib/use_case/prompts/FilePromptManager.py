@@ -6,7 +6,7 @@ class FilePromptManager(PromptManager):
         self.user_prompt_template = self._load_prompt(user_prompt_path)
 
     def _load_prompt(self, file_path: str) -> str:
-        if file_path is None:
+        if file_path is None or len(file_path) == 0:
             return ""
         with open(file_path, 'r') as f:
             return f.read()

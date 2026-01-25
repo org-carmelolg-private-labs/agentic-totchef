@@ -3,6 +3,7 @@ from lib.use_case.prompts.HomeMenuPrompt import GenerateHomeMenuPrompt
 from lib.use_case.prompts.KindergartenMenuPrompt import GetKindergartenMenuPrompt
 from lib.use_case.prompts.MergeMenuPrompt import MergeMenuPrompt
 from lib.use_case.prompts.WeekendMenuPrompt import WeekendMenuPrompt
+from lib.use_case.prompts.ShoppingListPrompt import ShoppingListPrompt
 from lib.use_case.tools import KindergartenTools, HomeKitchenTools
 
 llm_executor = LLMExecutor.get_instance()
@@ -11,6 +12,7 @@ kindergarten_menu_prompt = GetKindergartenMenuPrompt()
 home_menu_prompt = GenerateHomeMenuPrompt()
 merge_menu_prompt = MergeMenuPrompt()
 weekend_menu_prompt = WeekendMenuPrompt()
+shopping_list_prompt = ShoppingListPrompt()
 
 
 class TotChef:
@@ -54,11 +56,13 @@ class TotChef:
 
         TotChef.log_element(full_week_menu)
 
-        # TODO generate an adeguate prompt for shopping list. This is for testing purpose only
-        # shopping_list = llm_executor.ask(
-        #     prompt=f"Generami una lista della spesa divisa per categoria di prodotto in base al menu in input: {full_week_menu}",
-        #     chatbot_mode=False).message.content
-        # TotChef.log_element(shopping_list)
+        print("Generating Shopping List...")
+        shopping_list = llm_executor.ask(
+            prompt=shopping_list_prompt.get_user_prompt(full_week_menu),
+            system_prompt=shopping_list_prompt.get_system_prompt(),
+            chatbot_mode=False).message.content
+
+        TotChef.log_element(shopping_list)
 
     @staticmethod
     def log_element(string: str):

@@ -1,10 +1,9 @@
-Di seguito il menù settimanale valido per pranzo e cena dal lunedì al venerdì:
-```text
-{menu}
-```
 
-Ti chiedo di aggiungere al menu i pranzi e le cene di sabato e domenica.
-Per crearlo basati sulle ricette e ingredienti di casa nella mia cucina.
-
-Come categorie considera di usare i nomi in inglese (carboidrates, proteins and vegetables).
+        Di seguito il menù settimanale valido per pranzo e cena dal lunedì al venerdì: 
+        {menu}.
+        
+        Ti chiedo di aggiungere al menu i pranzi e le cene di sabato e domenica.
+        Per crearlo basati sulle ricette e ingredienti di casa nella mia cucina.
+        
+        Come categorie considera di usare i nomi in inglese (carboidrates, proteins and vegetables).
         

@@ -1,0 +1,7 @@
+Di seguito il menù settimanale completo (dal lunedì alla domenica) con pranzi e cene:
+```text
+{menu}
+```
+
+Ti chiedo di generare una lista della spesa completa per tutti i piatti del menu settimanale.
+Organizza la lista per categorie di prodotto e indica le quantità approssimative necessarie.

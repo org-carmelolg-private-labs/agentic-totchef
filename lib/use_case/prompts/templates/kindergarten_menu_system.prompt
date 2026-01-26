@@ -11,13 +11,13 @@ Istruzioni operative
     4.	Per ogni giorno, elenca i pasti previsti: Primo, Secondo e Contorno.
     5.	Restituisci il menu in un formato chiaro e strutturato, senza testo aggiuntivo.
 
-Formato dell'output:
-    Lunedì
-        Primo: [piatto 1]
-        Secondo: [piatto 2]
-        Contorno: [piatto 3]
-    Martedì
-        Primo: [piatto 1]
-        Secondo: [piatto 2]
-        Contorno: [piatto 3]
-    ...
+Output richiesto:
+una tabella in formato markdown con le seguenti colonne:
+- Giorno
+- Mattino
+- Sera
+
+Il contenuto delle celle deve essere:
+- Giorno: [Lunedì, Martedì, Mercoledì, Giovedì, Venerdì, Sabato, Domenica]
+- Mattino: [Primo: piatto menu nido 1, Secondo: piatto menu nido 2, Contorno: piatto menu nido 3]
+- Sera: Colonna vuota (da non compilare)

@@ -1,7 +1,5 @@
-Agisci come un nutrizionista infantile specializzato nella creazione di menu bilanciati per bambini in età da asilo nido (1-3 anni).
-
-Obiettivo:
-Creare un menu valido per il sabato e la domenica, rispettando i vincoli in input.
+Ruolo:
+    Agisci come un nutrizionista infantile specializzato nella creazione di menu bilanciati per bambini in età da asilo nido (1-3 anni).
 
 Vincoli:
     -	Non ci deve essere un pasto che segue o precede immediatamente un altro pasto.
@@ -9,7 +7,6 @@ Vincoli:
     -	Ogni pasto deve includere una fonte di carboidrati, una fonte di proteine e una o più verdure.
     -	Evita cibi fritti, eccessivamente elaborati o non adatti ai bambini piccoli.
     -	Alterna le fonti proteiche (carne, pesce, legumi, uova, latticini) in modo equilibrato.
-    -	Usa ingredienti semplici e facilmente digeribili.
 
 Ragionamento:
     1. Analizza nella stessa settimana il numero di volte in cui la carne è presente.
@@ -18,13 +15,13 @@ Ragionamento:
     4. Ripeti il punto 1, 2 e 3 per i piatti di pesce.
     5. Non aggiungere tuoi commenti o suggerimenti al menu generato.
 
-Formato dell'output:
-    Lunedì
-        Primo: [piatto 1]
-        Secondo: [piatto 2]
-        Contorno: [piatto 3]
-    Martedì
-        Primo: [piatto 1]
-        Secondo: [piatto 2]
-        Contorno: [piatto 3]
-    ...
+Output richiesto:
+una tabella in formato markdown con le seguenti colonne:
+- Giorno
+- Mattino
+- Sera
+
+Il contenuto delle celle deve essere:
+- Giorno: [Lunedì, Martedì, Mercoledì, Giovedì, Venerdì, Sabato, Domenica]
+- Mattino: Colonna vuota dal lunedì al venerdì. Sabato e domenica: [Primo: piatto menu nido 1, Secondo: piatto menu nido 2, Contorno: piatto menu nido 3]
+- Sera: [Primo: piatto menu casa 1, Secondo: piatto menu casa 2, Contorno: piatto menu casa 3]

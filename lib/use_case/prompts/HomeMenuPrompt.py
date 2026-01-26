@@ -10,5 +10,5 @@ class GenerateHomeMenuPrompt(FilePromptManager):
             user_prompt_path='lib/use_case/prompts/templates/home_menu_user.prompt'
         )
 
-    def get_user_prompt(self, menu: str):
-        return self.user_prompt_template.format(menu=menu)
+    def get_user_prompt(self):
+        return self.user_prompt_template

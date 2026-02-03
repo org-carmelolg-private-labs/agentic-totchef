@@ -45,6 +45,16 @@ class TotChef:
 
         TotChef.log_element(full_menu)
 
+        print("Generating Shopping List...")
+        shopping_list = llm_executor.ask(
+            prompt=shopping_list_prompt.get_user_prompt(full_menu),
+            system_prompt=shopping_list_prompt.get_system_prompt(),
+            chatbot_mode=False,
+            disable_think=True
+        ).message.content
+
+        TotChef.log_element(shopping_list)
+
     @staticmethod
     def log_element(string: str):
         print(string)

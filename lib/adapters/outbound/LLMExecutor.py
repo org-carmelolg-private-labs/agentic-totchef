@@ -27,16 +27,18 @@ class LLMExecutor(object):
             LLMExecutor.__instance = self
 
     @staticmethod
-    def ask(prompt: str, system_prompt: str = None, chatbot_mode: bool = False):
+    def ask(prompt: str, system_prompt: str = None, chatbot_mode: bool = False, disable_think: bool = False):
         """
         Simple chat interaction with the specified language model.
         :param prompt: the user prompt for the chat
         :param system_prompt: the system prompt to guide the model's behavior
         :param chatbot_mode: enables streaming mode if True
+        :param disable_think: disables the model to think before responding
         :return: the response from the language model
         """
+        enable_think = False if disable_think else think
 
-        config: ProviderConfiguration = ProviderConfiguration(think=bool(think), stream=chatbot_mode)
+        config: ProviderConfiguration = ProviderConfiguration(think=bool(enable_think), stream=chatbot_mode)
         return current_provider.chat(prompt=prompt, system_prompt=system_prompt, model=llm, config=config)
 
     @staticmethod

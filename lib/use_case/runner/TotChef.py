@@ -1,16 +1,13 @@
-from lib.adapters.outbound.LLMExecutor import LLMExecutor
-from lib.use_case.prompts.HomeMenuPrompt import GenerateHomeMenuPrompt
-from lib.use_case.prompts.KindergartenMenuPrompt import GetKindergartenMenuPrompt
-from lib.use_case.prompts.MergeMenuPrompt import MergeMenuPrompt
-from lib.use_case.prompts.ShoppingListPrompt import ShoppingListPrompt
-from lib.use_case.tools import KindergartenTools, HomeKitchenTools
-
-llm_executor = LLMExecutor.get_instance()
-
-kindergarten_menu_prompt = GetKindergartenMenuPrompt()
-home_menu_prompt = GenerateHomeMenuPrompt()
-merge_menu_prompt = MergeMenuPrompt()
-shopping_list_prompt = ShoppingListPrompt()
+"""
+TotChef runner using step classes for each phase.
+"""
+from concurrent.futures import ProcessPoolExecutor
+from lib.use_case.steps.KindergartenMenuStep import KindergartenMenuStep
+from lib.use_case.steps.HomeMenuStep import HomeMenuStep
+from lib.use_case.steps.MergeMenuStep import MergeMenuStep
+from lib.use_case.steps.ShoppingListStep import ShoppingListStep
+from lib.use_case.steps.StepResult import StepResult
+from lib.use_case.steps.CreateMarkdownStep import CreateMarkdownStep
 
 
 class TotChef:
@@ -21,42 +18,68 @@ class TotChef:
 
     @staticmethod
     def run():
-        print("Generating Kindergarten Menu for Week 1...")
-        kindergarten_menu = llm_executor.chat(
-            prompt=kindergarten_menu_prompt.get_user_prompt(1),
-            chatbot_mode=False,
-            tools=KindergartenTools.available_functions(),
-            system_prompt=kindergarten_menu_prompt.get_system_prompt()).message.content
-        TotChef.log_element(kindergarten_menu)
+        """
+        Run the TotChef workflow to generate menus and shopping lists.
 
-        print("Generating Home Menu for Week 1...")
-        home_menu = llm_executor.chat(
-            prompt=home_menu_prompt.get_user_prompt(),
-            system_prompt=home_menu_prompt.get_system_prompt(),
-            chatbot_mode=False,
-            tools=HomeKitchenTools.available_functions()).message.content
+        This method executes the following steps in sequence:
+        1. Generate kindergarten menu (parallel with step 2).
+        2. Generate home menu (parallel with step 1).
+        3. Merge the two menus.
+        4. Generate a shopping list from the merged menu.
+        5. Create a Markdown file containing the merged menu and shopping list.
 
-        TotChef.log_element(home_menu)
+        The first two steps are executed in parallel using ProcessPoolExecutor.
+        Results are logged after each step.
+        """
 
-        print("Merging all menus...")
-        full_menu = llm_executor.ask(
-            prompt=merge_menu_prompt.get_user_prompt(kindergarten_menu, home_menu),
-            chatbot_mode=False).message.content
+        # Step 1: Kindergarten menu
+        kg_step = KindergartenMenuStep()
+        kg_step_output: StepResult = StepResult(step_id=kg_step.step_id, result="")
+        # Step 2: Home menu
+        home_step = HomeMenuStep()
+        home_step_output = StepResult(step_id=home_step.step_id, result="")
 
-        TotChef.log_element(full_menu)
+        # Execute both steps in parallel
+        with ProcessPoolExecutor() as executor:
+            futures = [
+                executor.submit(kg_step.execute),
+                executor.submit(home_step.execute)
+            ]
 
-        print("Generating Shopping List...")
-        shopping_list = llm_executor.ask(
-            prompt=shopping_list_prompt.get_user_prompt(full_menu),
-            system_prompt=shopping_list_prompt.get_system_prompt(),
-            chatbot_mode=False,
-            disable_think=True
-        ).message.content
+            for future in futures:
+                single_result = future.result()
+                if single_result is not None and single_result.is_success():
+                    if single_result.step_id == kg_step.step_id:
+                        kg_step_output: StepResult = single_result
+                    elif single_result.step_id == home_step.step_id:
+                        home_step_output: StepResult = single_result
 
-        TotChef.log_element(shopping_list)
+        # Step 3: Merge menus
+        merge_step = MergeMenuStep()
+        merge_step_output: StepResult = merge_step.execute(kg_step_output.result, home_step_output.result)
+
+        # Step 4: Shopping list
+        shopping_list_step = ShoppingListStep()
+        shopping_list_output: StepResult = shopping_list_step.execute(merge_step_output.result)
+
+        # Add step that create a Markdown file with the merged menu and shopping list
+        create_md_step = CreateMarkdownStep()
+        create_md_output: StepResult = create_md_step.execute(merge_step_output.result, shopping_list_output.result)
+        if create_md_output is not None and create_md_output.is_success():
+            TotChef.log_element(f"Markdown created: {create_md_output.result}")
+        else:
+            TotChef.log_element("Failed to create markdown file")
 
     @staticmethod
     def log_element(string: str):
+        """
+        Log an element with separators.
+
+        Prints the given string followed by a blank line and a separator line.
+
+        Args:
+            string (str): The string to log.
+        """
         print(string)
         print()
         print('-----------------------------------')

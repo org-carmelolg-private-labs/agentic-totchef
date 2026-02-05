@@ -1,3 +1,11 @@
+"""
+TotChefChatbot Module
+
+This module provides the TotChefChatbot class, which implements an interactive chatbot
+for culinary and nutritional assistance. It supports both command-line and GUI interfaces,
+integrating tools from KindergartenTools and HomeKitchenTools.
+"""
+
 from lib.adapters.outbound.LLMExecutor import LLMExecutor
 from lib.use_case.tools import KindergartenTools, HomeKitchenTools
 from html_sanitizer import Sanitizer
@@ -10,6 +18,12 @@ class TotChefChatbot:
     KindergartenTools and HomeKitchenTools.
     """
     def __init__(self):
+        """
+        Initialize the TotChefChatbot instance.
+
+        Sets up the LLM executor and combines available functions from
+        KindergartenTools and HomeKitchenTools.
+        """
         self.llm_executor = LLMExecutor.get_instance()
         self.tools = {}
         self.tools.update(KindergartenTools.available_functions())
@@ -17,10 +31,11 @@ class TotChefChatbot:
 
     def run(self):
         """
-        Run an interactive chatbot session for TotChef.
+        Run an interactive chatbot session for TotChef in the command line.
+
         The chatbot utilizes functions from KindergartenTools and HomeKitchenTools
-        to assist users with culinary and nutritional queries.
-        :return:
+        to assist users with culinary and nutritional queries. Type 'exit' or 'quit'
+        to end the session.
         """
         print("Welcome to TotChef Chat! Type 'exit' or 'quit' to end the chat.")
 
@@ -39,18 +54,24 @@ class TotChefChatbot:
     def _chat(self, user_prompt: str):
         """
         Chat with the TotChef chatbot using the provided user prompt.
+
         This method integrates functions from KindergartenTools and HomeKitchenTools
         to enhance the chatbot's capabilities.
-        :param user_prompt: The prompt or question from the user.
-        :return: A stream of responses from the chatbot.
+
+        Args:
+            user_prompt (str): The prompt or question from the user.
+
+        Returns:
+            A stream of responses from the chatbot.
         """
         return self.llm_executor.chat(prompt=user_prompt, tools=self.tools)
 
     def _root(self):
         """
         Define the GUI layout and behavior for the TotChef chatbot.
+
         This method sets up the chat interface, including message display and input handling.
-        :return:
+        It is used internally by the gui method.
         """
         async def send() -> None:
             question = text.value
@@ -84,7 +105,7 @@ class TotChefChatbot:
     def gui(self):
         """
         Launch the GUI for the TotChef chatbot.
+
         This method initializes the user interface and starts the event loop.
-        :return:
         """
         ui.run(self._root, title='Agentic TotChef', favicon='', show_welcome_message=True, reconnect_timeout=60)

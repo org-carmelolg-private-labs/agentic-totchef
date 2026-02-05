@@ -4,7 +4,7 @@ Service module to interact with the Kindergarten API.
 from typing import Any
 from datetime import date
 from lib.commons.EnvironmentVariables import EnvironmentVariables
-from lib.use_case.integration.http import GenericHttpService
+from lib.core.integration.http import GenericHttpService
 
 env = EnvironmentVariables()
 

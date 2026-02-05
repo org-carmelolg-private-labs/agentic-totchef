@@ -3,7 +3,7 @@ Service module for interacting with the Home Kitchen API.
 """
 from typing import Any
 from lib.commons.EnvironmentVariables import EnvironmentVariables
-from lib.use_case.integration.http import GenericHttpService
+from lib.core.integration.http import GenericHttpService
 
 env = EnvironmentVariables()
 

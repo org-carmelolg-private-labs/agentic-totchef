@@ -1,26 +1,25 @@
 # Agentic Totchef
-
 ![logo](static/logo.svg)
 
-A minimal **AI Agent** example for managing recipes and kindergarten activities using **Ollama** locally for reasoning and tool calling. This project demonstrates building generative agents with minimal dependencies.
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/org-carmelolg-private-labs/agentic-totchef)
+[![License](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/) 
 
-## Key Features
+Agentic Totchef is a small, local-first example that demonstrates how to build generative AI agents that manage recipes and kindergarten menus using Ollama for reasoning and tool calls. The project is intentionally lightweight and modular so it can be used as a learning reference or a base for experimentation.
 
-- **ReAct Agent with Ollama**: Utilizes Ollama for advanced reasoning and tool-calling capabilities.
-- **Multiple Toolsets**: Includes specialized tools for home kitchen recipes (`HomeKitchenTools.py`) and kindergarten activities (`KindergartenTools.py`).
-- **Flexible LLM Providers**: Supports various LLM providers through `LLMProviderFactory.py`.
-- **Modular Architecture**: Clearly separated concerns for adapters, commons, core logic, and integration.
-- **Works offline**: Designed to work with local Ollama models.
-- **Robust error handling**: Implemented for graceful operation.
-- **Verbose tracing**: Provides insights into the agent's reasoning and tool calls.
+## Key features
+
+- ReAct-style agent orchestration with Ollama for step-by-step reasoning and tool-calling.
+- Domain tools for Home Kitchen and Kindergarten workflows (HTTP-based tools).
+- Pluggable LLM provider architecture via LLMProviderFactory.
+- Works with local Ollama models and supports embeddings for contextual retrieval.
+- Verbose tracing and error handling to aid development and debugging.
 
 ## Prerequisites
 
-- **Python 3.10+**
-- **Ollama** installed and running (`ollama serve`)
-- Ollama models with tools or thinking feature (e.g., `qwen3:latest`)
-- Ollama models with embedding support (e.g., `nomic-embed-text:latest`)
-- `.env` file with all properties specified in the Configuration section.
+- Python 3.10+
+- Ollama installed and running (e.g. run `ollama serve`)
+- Ollama models for reasoning (e.g. `qwen3:latest`) and embeddings (e.g. `nomic-embed-text:latest`)
+- A `.env` file based on `.env.example` with required configuration values
 
 ## Installation
 
@@ -28,158 +27,78 @@ A minimal **AI Agent** example for managing recipes and kindergarten activities 
 git clone https://github.com/org-carmelolg-private-labs/agentic-totchef.git
 cd agentic-totchef
 python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+cp .env.example .env
+# Edit .env to set your models and hosts
 ```
-
-Create the `.env` file with the variables listed in prerequisites.
 
 ## Configuration
 
-Edit `.env` to customize:
+Set the important variables in `.env` (examples):
 
 ```
-# Required
 EMBEDDING_MODEL=nomic-embed-text:latest
 LANGUAGE_MODEL=qwen3:latest
 THINKING_MODE=True
 LLM_PROVIDER=ollama
 
-# Optional - Example API configurations (adjust as per actual services)
-HOME_KITCHEN_API_HOST=http://localhost:8000/kitchen # Example placeholder
-KINDERGARTEN_API_HOST=http://localhost:8000/kindergarten # Example placeholder
+# Optional HTTP service hosts used by the domain tools
+# If not set, defaults are under static folder under .json files
+HOME_KITCHEN_API_HOST=http://localhost:8000/kitchen
+KINDERGARTEN_API_HOST=http://localhost:8000/kindergarten
 ```
 
-## Running the Agent
+## Getting Started
 
-Start the interactive agent:
+- Ensure Ollama is running and the models referenced in `.env` are available locally.
+- Activate the virtual environment and install dependencies as shown above.
+- Start a chat session or run the batch runner to exercise the agent behaviour.
 
-```bash
-python agentic-totchef-chat.py # Command line chat interface
-# OR
-python agentic-totchef-gui-chat.py # GUI chat interface, typically available on http://localhost:8080 or similar
-```
-The agent will reason step-by-step, call necessary tools, and return the response.
+### Usage
 
-## Running on Docker    
-Create this shell script (e.g., `run-docker.sh`):
-```shell
-#!/bin/bash
-docker build . -t agentic-totchef
-docker run -d -p8080:8080 agentic-totchef
-```
+1. Quick interactive (CLI):
+```terminal
+python agentic-totchef-chat.py
+``` 
+starts a REPL-like chat interface where the agent reasons and can call tools.
 
-Run on the terminal the following commands:
-```shell
-chmod +x run-docker.sh
-./run-docker.sh
-```
+2. Quick interactive (GUI):
+```terminal
+python agentic-totchef-gui-chat.py
+``` 
+launches the GUI chat (usually on http://localhost:8080).
+3. Batch generation:
+```terminal
+python agentic-totchef.py
+``` 
+runs the automatic menu-generation flow (useful for scheduled or CI runs).
 
-## Usage Examples
+### Examples
 
-**Automated Menu Generation**:
-
-Running `agentic-totchef.py` will automatically generate a full week menu based on the kindergarten and home kitchen menus.
+- Generate a full-week menu (batch):
 
 ```bash
 python agentic-totchef.py
 ```
 
-Expected output:
+- Ask the chat agent for domain information (CLI or GUI):
 
 ```
-Generating Kindergarten Menu for Week 1 Morning...
-Generating Home Menu for Week 1 Evening...
-Union of Morning and Evening Menus for Week 1...
-Generating Full Week Menu...
-<A full week menu will be printed here>
+> Give me the home kitchen vegetables available
+> What is Tuesday's menu for week 2 from the kindergarten data?
+> Create a healthy weekly menu plan based on the kindergarten week 1 menu
 ```
 
-**Interactive Chat**:
+## Running with Docker
 
-You can also interact with the agent using a chat interface.
+Build and run the container:
 
-**Home Kitchen Query**:
-
-```
-Input: "Give me the home kitchen vegetable available"
-Output: Here the list of vegetable: ... (example output)
+```bash
+docker build -t agentic-totchef .
+docker run -d -p 8080:8080 --name agentic-totchef agentic-totchef
 ```
 
-**Kindergarten Menu Query**:
+## License
 
-```
-Input: "Give me the Tuesday menu from the second week of the nursery."
-Output: Main Course: Grilled Chicken with Rice, Side: Steamed Vegetables, Dessert: Fruit Salad. (example output)
-```
-
-**Generate Menu Plan**:
-
-```
-Input: "Create a healthy weekly menu plan based on the first week of the kindergarten menu."
-
-Output:
-    Monday:
-      - Breakfast: Oatmeal with fresh fruits
-      - Lunch: Quinoa salad with mixed vegetables
-      - Dinner: Vegetable stir-fry with tofu
-    ...
-```  
-
-## Project Architecture
-
-```
-.
-├── lib/
-│   ├── adapters/
-│   │   └── outbound/
-│   │       └── LLMExecutor.py          # Executes LLM interactions and tool calls
-│   ├── commons/
-│   │   ├── Constants.py                # Project-wide constants
-│   │   ├── EnvironmentVariables.py     # Manages environment variables
-│   │   └── MathUtils.py                # Utility functions
-│   ├── core/
-│   │   ├── providers/
-│   │   │   ├── LLMProvider.py          # Interface for LLM providers
-│   │   │   ├── LLMProviderFactory.py   # Factory for creating LLM providers
-│   │   │   ├── OllamaProvider.py       # Ollama specific LLM provider
-│   │   │   └── model/                  # LLM provider configuration models
-│   │   └── service/
-│   │       └── KnowledgeService.py     # Orchestrates knowledge retrieval and tool execution
-│   └── use_case/
-│       ├── integration/
-│       │   └── http/
-│       │       ├── HomeKitchenHttpService.py   # HTTP client for home kitchen APIs
-│       │       └── KindergartenHttpService.py  # HTTP client for kindergarten APIs
-│       ├── prompts/
-│       │   ├── HomeMenuPrompt.py
-│       │   ├── KindergartenMenuPrompt.py
-│       │   ├── MergeMenuPrompt.py
-│       │   ├── PromptManager.py        # Manages system prompts
-│       │   └── WeekendMenuPrompt.py
-│       ├── runner/
-│       │   ├── TotChef.py              # Simple chat runner for the Totchef agent
-│       │   └── TotChefChatbot.py       # Chatbot loop also with interface for Totchef agent
-│       └── tools/
-│           ├── HomeKitchenTools.py     # Tools for home kitchen domain
-│           └── KindergartenTools.py    # Tools for kindergarten domain
-├── agentic-totchef-chat.py             # Command-line interface for the agent
-├── agentic-totchef-gui-chat.py         # GUI interface for the agent
-├── Dockerfile                          # Dockerization setup
-├── run-docker.sh                       # Script to build and run Docker container
-├── requirements.txt                    # Project dependencies
-├── static/                             # Static assets (e.g., logo)
-└── .env.example                        # Example environment variables file
-```
-
-- **OllamaLLM + Embeddings**: Local models for reasoning and context.
-- **Custom tools**: Pure HTTP calls with docstrings for tool calling.
-- **AgentExecutor**: Handles reasoning-action-observation loop (managed by `LLMExecutor.py` and `KnowledgeService.py`).
-
-# License
-
-![CC BY-NC-ND 4.0](https://licensebuttons.net/l/by-nc-nd/4.0/88x31.png)
-
-This project is licensed under the **Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)**.
-
-See `LICENSE.md` for the full license text.
+This project is licensed under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0). See `LICENSE.md` for details.

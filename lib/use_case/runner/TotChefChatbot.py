@@ -154,10 +154,10 @@ class TotChefChatbot:
 
         message_container = ui.column().classes('w-full max-w-2xl mx-auto flex-grow items-stretch chat-container')
 
-        with (ui.footer().classes(''), ui.column().classes('w-full max-w-3xl mx-auto my-6')):
+        with (ui.footer(), ui.column().classes('w-full max-w-3xl mx-auto my-6')):
             with ui.row().classes('w-full no-wrap items-center'):
                 placeholder = 'Ask me about nutrition, recipes, or healthy eating...'
-                text = ui.input(placeholder=placeholder).props('rounded outlined input-class=mx-3 color=green-7').classes('w-full self-center').on('keydown.enter', send)
+                text = ui.input(placeholder=placeholder).props('rounded outlined input-class=mx-3').classes('w-full self-center').style('color: #2e7d32').on('keydown.enter', send)
                 button = ui.button(text="Send", color="green-7", on_click=send).props('rounded').classes('self-center px-6')
 
             ui.markdown('Made with 🔥 by [carmelolg](https://carmelolg.github.io)') \

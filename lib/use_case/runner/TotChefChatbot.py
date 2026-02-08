@@ -92,19 +92,22 @@ class TotChefChatbot:
                     background: rgba(255, 255, 255, 0.95);
                     border-radius: 16px;
                     padding: 20px;
-                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+                    box-shadow: 0 4px 20px\ rgba(0, 0, 0, 0.08);
                     margin-top: 20px;
                 }
                 .q-message-sent {
-                    background: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%) !important;
-                    color: white !important;
+                    //background: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%) !important;
+                    //color: white !important;
+                    border: 1px solid #e0e0e0;
                     border-radius: 18px 18px 4px 18px !important;
+                    padding: 12px 16px !important;
                 }
                 .q-message-received {
-                    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%) !important;
+                    //background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%) !important;
                     border: 1px solid #e0e0e0;
                     border-radius: 18px 18px 18px 4px !important;
                     color: #2e7d32 !important;
+                    padding: 12px 16px !important;
                 }
                 .header-container {
                     background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
@@ -132,14 +135,14 @@ class TotChefChatbot:
         
         # Add professional nutritionist header
         with ui.element('div').classes('header-container'):
-            ui.html('<h1 class="header-title">🥗 TotChef Nutritionist</h1>')
-            ui.html('<p class="header-subtitle">Your Personal AI Nutrition & Culinary Expert</p>')
+            ui.html('<h1 class="header-title">🥗 TotChef Nutritionist</h1>', sanitize=False)
+            ui.html('<p class="header-subtitle">Your Personal AI Nutrition & Culinary Expert</p>', sanitize=False)
         
         async def send() -> None:
             question = text.value
             text.value = ''
             with message_container:
-                ui.chat_message(text=question, name='You', sent=True)
+                ui.chat_message(text=question, name='👤 You', sent=True)
                 response_message = ui.chat_message(name='🍎 Nutritionist', sent=False)
                 spinner = ui.spinner(type='dots', size='lg', color='green')
 

@@ -9,11 +9,10 @@ import uuid
 from lib.use_case.steps.AbstractStep import AbstractStep
 from lib.use_case.steps.StepResult import StepResult
 
-from lib.adapters.outbound.LLMExecutor import LLMExecutor
+from lib.adapters.outbound.LLMExecutor import chat
 from lib.use_case.prompts.HomeMenuPrompt import GenerateHomeMenuPrompt
 from lib.use_case.tools import HomeKitchenTools
 
-llm_executor = LLMExecutor.get_instance()
 home_menu_prompt = GenerateHomeMenuPrompt()
 
 
@@ -44,7 +43,7 @@ class HomeMenuStep(AbstractStep):
             StepResult: The result containing the generated home menu.
         """
         print("Generating Home Menu for Week 1...")
-        home_menu = llm_executor.chat(
+        home_menu = chat(
             prompt=home_menu_prompt.get_user_prompt(),
             system_prompt=home_menu_prompt.get_system_prompt(),
             chatbot_mode=False,

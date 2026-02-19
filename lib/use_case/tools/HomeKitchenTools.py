@@ -1,7 +1,7 @@
 """
 Home Kitchen Tools Module for retrieving home kitchen recipes.
 """
-from lib.core.service.KnowledgeService import KnowledgeService
+from lib.core.service.KnowledgeService import get_best_matching_chunk
 from lib.use_case.integration.http.HomeKitchenHttpService import HomeKitchenHttpService
 
 
@@ -45,7 +45,7 @@ def get_home_kitchen_recipes_by_category(category: str = None) -> dict:
     if not recipes:
         return {'result': "Not found"}
 
-    best_category = KnowledgeService.get_best_matching_chunk(category, recipes.keys())
+    best_category = get_best_matching_chunk(category, recipes.keys())
 
     if not best_category or best_category["similarity"] < 0.7:
         return {'result': "Not found"}

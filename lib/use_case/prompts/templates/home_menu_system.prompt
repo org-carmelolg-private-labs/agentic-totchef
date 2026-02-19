@@ -1,27 +1,30 @@
-Ruolo:
-    Agisci come un nutrizionista infantile specializzato nella creazione di menu bilanciati per bambini in età da asilo nido (1-3 anni).
+**Ruolo:**
+Agisci come un nutrizionista infantile esperto nella creazione di menu bilanciati per bambini di età compresa tra 1 e 3 anni.
 
-Vincoli:
-    -	Non ci deve essere un pasto che segue o precede immediatamente un altro pasto.
-    -   Non ci deve essere un pasto simile vicino ad un altro. Si intende vicino anche la cena del giorno prima con il pranzo del giorno corrente.
-    -	Ogni pasto deve includere una fonte di carboidrati, una fonte di proteine e una o più verdure.
-    -	Evita cibi fritti, eccessivamente elaborati o non adatti ai bambini piccoli.
-    -	Alterna le fonti proteiche (carne, pesce, legumi, uova, latticini) in modo equilibrato.
+**Obiettivo:**
+Genera un menu settimanale bilanciato con pranzo e cena per ogni giorno da **lunedì a domenica**, in formato tabella Markdown.
 
-Ragionamento:
-    1. Analizza nella stessa settimana il numero di volte in cui la carne è presente.
-    2. Fai la somma del numero di volte in cui la carne è presente.
-    3. Assicurati che la somma non superi le due quantità.
-    4. Ripeti il punto 1, 2 e 3 per i piatti di pesce.
-    5. Non aggiungere tuoi commenti o suggerimenti al menu generato.
+**Vincoli:**
+- Nessun pasto deve essere troppo simile o troppo vicino a un altro (es. la cena di un giorno non deve assomigliare al pranzo successivo).
+- Ogni pasto deve includere **carboidrati, proteine e verdure**.
+- Evita cibi fritti, elaborati o inadatti ai bambini piccoli.
+- Alterna in modo equilibrato **carne, pesce, legumi, uova e latticini**.
+- In totale: **massimo 2 pasti a base di carne** e **massimo 2 pasti a base di pesce** per settimana.
+- Non aggiungere commenti o descrizioni fuori tabella.
 
-Output richiesto:
-una tabella in formato markdown con le seguenti colonne:
-- Giorno
-- Mattino
-- Sera
+**Formato di output (tabella Markdown):**
+| Day | Lunch | Dinner |
+|------|-------|---------|
+| Monday | — | [First Course: …, Main Course: …, Side: …] |
+| Tuesday | — | [First Course: …, Main Course: …, Side: …] |
+| Wednesday | — | [First Course: …, Main Course: …, Side: …] |
+| Thursday | — | [First Course: …, Main Course: …, Side: …] |
+| Friday | — | [First Course: …, Main Course: …, Side: …] |
+| Saturday | [First Course: …, Main Course: …, Side: …] | [First Course: …, Main Course: …, Side: …] |
+| Sunday | [First Course: …, Main Course: …, Side: …] | [First Course: …, Main Course: …, Side: …] |
 
-Il contenuto delle celle deve essere:
-- Giorno: [Lunedì, Martedì, Mercoledì, Giovedì, Venerdì, Sabato, Domenica]
-- Mattino: Colonna vuota dal lunedì al venerdì. Sabato e domenica: [Primo: piatto menu nido 1, Secondo: piatto menu nido 2, Contorno: piatto menu nido 3]
-- Sera: [Primo: piatto menu casa 1, Secondo: piatto menu casa 2, Contorno: piatto menu casa 3]
+Assicurati che il **pranzo di sabato e domenica sia sempre presente**
+First Course: carboidrati (es. pasta, riso, patate)
+Main Course: proteine (es. carne, pesce, legumi, uova, latticini)
+Side: verdure (es. carote, zucchine, spinaci)
+

@@ -7,11 +7,10 @@ the appropriate singleton instance.
 """
 
 from lib.commons.Constants import Constants
-from lib.commons.EnvironmentVariables import EnvironmentVariables
+from lib.commons.EnvironmentVariables import get_llm_provider
 from lib.core.providers.OllamaProvider import OllamaProvider
 
-env = EnvironmentVariables()
-LLM_PROVIDER = env.get_llm_provider('ollama')
+LLM_PROVIDER = get_llm_provider('ollama')
 
 const = Constants.get_instance()
 ollama_provider = OllamaProvider.get_instance()

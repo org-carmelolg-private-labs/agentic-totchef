@@ -43,4 +43,3 @@ class GenericHttpService:
                 return json.load(json_file)
         except (FileNotFoundError, json.JSONDecodeError):
             return None
-

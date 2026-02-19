@@ -10,14 +10,12 @@ from typing import Iterator, Union, List
 
 import ollama as OllamaClient
 
-from lib.commons.EnvironmentVariables import EnvironmentVariables
+from lib.commons.EnvironmentVariables import get_embedding_model
 from lib.core.providers.LLMProvider import Provider
 from lib.core.providers.model.LLMProviderConfiguration import ProviderConfiguration
 
-env = EnvironmentVariables()
 
-
-class OllamaProvider(Provider):
+class   OllamaProvider(Provider):
     """
     Singleton provider for Ollama LLM interactions.
 
@@ -131,7 +129,7 @@ class OllamaProvider(Provider):
             think=config.get_think()
         )
 
-    def embed(self, text: str, embedding_model: str = env.get_embedding_model()) -> List[float]:
+    def embed(self, text: str, embedding_model: str = get_embedding_model()) -> List[float]:
         """
         Generate embeddings for the given text.
 

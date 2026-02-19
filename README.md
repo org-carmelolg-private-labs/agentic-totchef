@@ -68,6 +68,7 @@ starts a REPL-like chat interface where the agent reasons and can call tools.
 python agentic-totchef-gui-chat.py
 ``` 
 launches the GUI chat (usually on http://localhost:8080).
+
 3. Batch generation:
 ```terminal
 python agentic-totchef.py

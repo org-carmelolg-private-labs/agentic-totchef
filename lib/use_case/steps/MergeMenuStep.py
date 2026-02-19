@@ -9,10 +9,9 @@ import uuid
 from lib.use_case.steps.AbstractStep import AbstractStep
 from lib.use_case.steps.StepResult import StepResult
 
-from lib.adapters.outbound.LLMExecutor import LLMExecutor
+from lib.adapters.outbound.LLMExecutor import ask
 from lib.use_case.prompts.MergeMenuPrompt import MergeMenuPrompt
 
-llm_executor = LLMExecutor.get_instance()
 merge_menu_prompt = MergeMenuPrompt()
 
 
@@ -45,7 +44,7 @@ class MergeMenuStep(AbstractStep):
             StepResult: The result containing the merged menu.
         """
         print("Merging menus...")
-        merged_menu = llm_executor.ask(
+        merged_menu = ask(
             prompt=merge_menu_prompt.get_user_prompt(first_menu, second_menu),
             chatbot_mode=False,
             disable_think=True

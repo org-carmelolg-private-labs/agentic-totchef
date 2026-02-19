@@ -40,9 +40,8 @@ class CreateMarkdownStep(AbstractStep):
                 "## Menu\n",
                 full_menu or "(no menu provided)",
                 "## Shopping List\n",
-                "```",
                 shopping_list or "(no shopping list provided)",
-                "```\n",
+                "\n",
             ]
 
             file_path.write_text("\n".join(content_lines), encoding="utf-8")

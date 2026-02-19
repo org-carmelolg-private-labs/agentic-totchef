@@ -8,10 +8,8 @@ Module-level helper functions were removed; callers should instantiate
 """
 from typing import Any
 from datetime import date
-from lib.commons.EnvironmentVariables import EnvironmentVariables
+from lib.commons.EnvironmentVariables import get_kindergarten_api_host, get_kindergarten_api_path
 from lib.core.integration.http.GenericHttpService import GenericHttpService
-
-env = EnvironmentVariables()
 
 
 class KindergartenHttpService(GenericHttpService):
@@ -27,15 +25,15 @@ class KindergartenHttpService(GenericHttpService):
     def get_winter_menu(self) -> Any | None:
         """Retrieve the winter menu from the Kindergarten API or fallback file."""
         return self.get(
-            api_host=env.get_kindergarten_api_host(),
-            api_path=env.get_kindergarten_api_path(),
+            api_host=get_kindergarten_api_host(),
+            api_path=get_kindergarten_api_path(),
             fallback_path='static/kindergarten-winter-menu.json'
         )
 
     def get_summer_menu(self) -> Any | None:
         """Retrieve the summer menu from the Kindergarten API or fallback file."""
         return self.get(
-            api_host=env.get_kindergarten_api_host(),
-            api_path=env.get_kindergarten_api_path(),
+            api_host=get_kindergarten_api_host(),
+            api_path=get_kindergarten_api_path(),
             fallback_path='static/kindergarten-summer-menu.json'
         )

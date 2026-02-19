@@ -6,7 +6,7 @@ for culinary and nutritional assistance. It supports both command-line and GUI i
 integrating tools from KindergartenTools and HomeKitchenTools.
 """
 
-from lib.adapters.outbound.LLMExecutor import LLMExecutor
+from lib.adapters.outbound.LLMExecutor import chat
 from lib.use_case.tools import KindergartenTools, HomeKitchenTools
 from html_sanitizer import Sanitizer
 from nicegui import ui
@@ -24,7 +24,7 @@ class TotChefChatbot:
         Sets up the LLM executor and combines available functions from
         KindergartenTools and HomeKitchenTools.
         """
-        self.llm_executor = LLMExecutor.get_instance()
+        self.chat_func = chat
         self.tools = {}
         self.tools.update(KindergartenTools.available_functions())
         self.tools.update(HomeKitchenTools.available_functions())
@@ -64,7 +64,7 @@ class TotChefChatbot:
         Returns:
             A stream of responses from the chatbot.
         """
-        return self.llm_executor.chat(prompt=user_prompt, tools=self.tools)
+        return self.chat_func(prompt=user_prompt, tools=self.tools)
 
     def _root(self):
         """

@@ -9,7 +9,7 @@ __pycache__/
 *test*
 # Unit tests directory is tracked – negate the *test* rule above for it
 !tests/
-!tests/**
+!tests/*.py
 # Distribution / packaging
 .Python
 build/

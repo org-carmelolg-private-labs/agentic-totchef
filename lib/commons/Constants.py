@@ -22,17 +22,17 @@ class Constants(object):
 
     __instance = None
 
-    @staticmethod
-    def get_instance():
+    @classmethod
+    def get_instance(cls):
         """
         Get the singleton instance of Constants.
 
         Returns:
             Constants: The singleton instance of the Constants class.
         """
-        if Constants.__instance is None:
-            Constants()
-        return Constants.__instance
+        if cls.__instance is None:
+            cls()
+        return cls.__instance
 
     def __init__(self):
         """

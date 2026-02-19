@@ -29,17 +29,17 @@ class   OllamaProvider(Provider):
 
     __instance = None
 
-    @staticmethod
-    def get_instance():
+    @classmethod
+    def get_instance(cls):
         """
         Get the singleton instance of OllamaProvider.
 
         Returns:
             OllamaProvider: The singleton instance.
         """
-        if OllamaProvider.__instance is None:
-            OllamaProvider()
-        return OllamaProvider.__instance
+        if cls.__instance is None:
+            cls()
+        return cls.__instance
 
     def __init__(self):
         """

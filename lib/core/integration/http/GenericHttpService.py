@@ -16,8 +16,7 @@ class GenericHttpService:
     Subclasses can reuse the concrete `get` implementation below.
     """
 
-    @staticmethod
-    def get(api_host: str, api_path: str, fallback_path: str) -> Any | None:
+    def get(self, api_host: str, api_path: str, fallback_path: str) -> Any | None:
         """
         Makes a GET request to a specified API and falls back to a local file on failure.
 

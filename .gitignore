@@ -7,6 +7,9 @@ __pycache__/
 # C extensions
 *.so
 *test*
+# Unit tests directory is tracked – negate the *test* rule above for it
+!tests/
+!tests/*.py
 # Distribution / packaging
 .Python
 build/

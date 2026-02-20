@@ -4,6 +4,8 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# Generated output from CreateMarkdownStep (used during testing)
+static/menu_shopping_*.md
 # C extensions
 *.so
 *test*

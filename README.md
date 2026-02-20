@@ -3,7 +3,7 @@
 
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/org-carmelolg-private-labs/agentic-totchef)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
-[![Coverage](https://raw.githubusercontent.com/org-carmelolg-private-labs/agentic-totchef/main/static/coverage.svg)](https://github.com/org-carmelolg-private-labs/agentic-totchef/actions)
+[![Coverage](https://raw.githubusercontent.com/org-carmelolg-private-labs/agentic-totchef/master/static/coverage.svg)](https://github.com/org-carmelolg-private-labs/agentic-totchef/actions)
 
 Agentic Totchef is a small, local-first example that demonstrates how to build generative AI agents that manage recipes and kindergarten menus using Ollama for reasoning and tool calls. The project is intentionally lightweight and modular so it can be used as a learning reference or a base for experimentation.
 
